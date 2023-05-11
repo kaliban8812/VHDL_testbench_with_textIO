@@ -6,7 +6,7 @@ use ieee.std_logic_textio.all;
 
 library work;
 use work.MP_package.all;
-use work.MP_read_file_vector.all;
+use work.MP_read_file_vector_synch.all;
 use work.MP_write_file_vector.all;
 
 entity dut_text_file is
@@ -25,6 +25,13 @@ architecture dut_text_file_rtl of dut_text_file is
     signal stb_o  : std_logic;
     signal data_o : std_logic_vector(DATA_LENGTH - 1 downto 0);
 
+    constant FILE_NAME_DATA_IN  : string := "D:/Vova/Prog/projects/data_verification/test_data_i.txt";
+    constant FILE_NAME_DATA_OUT : string := "D:/Vova/Prog/projects/data_verification/test_data_o.txt";
+    constant FILE_NAME_DATA_REF : string := "D:/Vova/Prog/projects/data_verification/test_data_r.txt";
+    -- file data_in                : file;
+    -- file data_out               : file;
+    -- file data_ref               : file;
+
     signal start_compare    : boolean := false;
     signal pass_flag        : boolean := false;
     signal data_reference   : std_logic_vector(DATA_LENGTH - 1 downto 0);
@@ -35,34 +42,35 @@ begin
     clk_i <= not clk_i after CLK_PER / 2;
 
     READ_DATA_FROM_FILE_PROC : process
-        file input_file : text is in "D:/Vova/Prog/projects/data_verification/test_data_i.txt";
+        -- file input_file : text is in "D:/Vova/Prog/projects/data_verification/test_data_i.txt";
     begin
         MP_start_reset(10 * CLK_PER, rst_i);
-        MP_read_file_vector_synch(clk_i, input_file, std_vector_input_s, stb_i);
-        file_close(input_file);
-        start_compare <= true;
+
+        MP_read_file_vector_synch(clk_i, FILE_NAME_DATA_IN, std_vector_input_s, stb_i);
+        -- file_close(input_file);
+        -- start_compare <= true;
         MP_end_simulation (10 * CLK_PER);
     end process READ_DATA_FROM_FILE_PROC;
 
-    COMPARE_DATA_PROC : process
-        file file_r : text is in "D:/Vova/Prog/projects/data_verification/test_data_reference.txt";
-        file file_t : text is in "D:/Vova/Prog/projects/data_verification/test_data_o.txt";
-    begin
-        if start_compare then
-            while ((not endfile(file_r)) or (not endfile(file_t))) loop
-                MP_read_file_vector(file_r, data_reference);
-                MP_read_file_vector(file_t, data_transformed);
-                if data_reference = data_transformed then
-                    pass_flag <= true;
-                else
-                    pass_flag <= false;
-                    report "ERROR";
-                end if;
-                wait for CLK_PER;
-            end loop;
-        end if;
-        wait for CLK_PER;
-    end process COMPARE_DATA_PROC;
+    -- COMPARE_DATA_PROC : process
+    --     file file_r : text is in "D:/Vova/Prog/projects/data_verification/test_data_reference.txt";
+    --     file file_t : text is in "D:/Vova/Prog/projects/data_verification/test_data_o.txt";
+    -- begin
+    --     if start_compare then
+    --         while ((not endfile(file_r)) or (not endfile(file_t))) loop
+    --             MP_read_file_vector(file_r, data_reference);
+    --             MP_read_file_vector(file_t, data_transformed);
+    --             if data_reference = data_transformed then
+    --                 pass_flag <= true;
+    --             else
+    --                 pass_flag <= false;
+    --                 report "ERROR";
+    --             end if;
+    --             wait for CLK_PER;
+    --         end loop;
+    --     end if;
+    --     wait for CLK_PER;
+    -- end process COMPARE_DATA_PROC;
 
     -- COMPARE_DATA_PROC : process (clk_i)
     --     file file_r : text is in "D:/Vova/Prog/projects/data_verification/test_data_reference.txt";

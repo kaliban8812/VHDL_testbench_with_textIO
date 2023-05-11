@@ -7,7 +7,8 @@ use ieee.std_logic_textio.all;
 package MP_read_file_vector is
 
     procedure MP_read_file_vector (
-        file input_file           : text;
+        -- file input_file           : text;
+        constant FILE_NAME        : string;
         signal std_vector_input_s : out std_logic_vector
     );
 
@@ -23,14 +24,17 @@ end package MP_read_file_vector;
 package body MP_read_file_vector is
 
     procedure MP_read_file_vector (
-        file input_file           : text;
+        -- file input_file           : text;
+        constant FILE_NAME        : string;
         signal std_vector_input_s : out std_logic_vector
     )
     is
+    file input_file              : file;
     variable input_line         : line;
     variable std_vector_input_v : std_logic_vector(std_vector_input_s'range);--(8 - 1 downto 0);
     variable good_v             : boolean;
 begin
+    file_open(input_file, FILE_NAME, read_mode);
     if (not endfile(input_file)) then
         readline(input_file, input_line); -- Read a row from the text file
         read(input_line, std_vector_input_v, good_v);
