@@ -41,7 +41,7 @@ begin
         MP_start_reset(10 * CLK_PER, rst_i);
         MP_read_file_vector_synch(clk_i, FILE_NAME_DATA_IN, data_file, stb_i);
         wait for 100 * CLK_PER;
-        MP_compare_files(FILE_NAME_DATA_OUT, FILE_NAME_DATA_REF, LENGTH_OUT);
+        MP_compare_files(FILE_NAME_DATA_REF, FILE_NAME_DATA_OUT, LENGTH_OUT);
         MP_end_simulation (10 * CLK_PER);
     end process MAIN_PROC;
     -- write data to the output file, ckl and stb is needed

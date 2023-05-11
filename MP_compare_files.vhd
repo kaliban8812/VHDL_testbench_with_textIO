@@ -1,7 +1,7 @@
 -- compare two files
 -- files should contain the std_logic_vectors with length DATA_LENGTH
 
-ibrary ieee;
+library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.textio.all;
@@ -50,6 +50,9 @@ begin
         readline(file_0, input_line_0);
         readline(file_1, input_line_1);
         read(input_line_0, vector_0, good_v);
+        if (not good_v) then
+            report "[ERROR] : error of the variable" severity failure;
+        end if;
         read(input_line_1, vector_1, good_v);
         if (not good_v) then
             report "[ERROR] : error of the variable" severity failure;
