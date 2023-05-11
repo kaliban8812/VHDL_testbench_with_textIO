@@ -1,4 +1,7 @@
-library ieee;
+-- compare two files
+-- files should contain the std_logic_vectors with length DATA_LENGTH
+
+ibrary ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.textio.all;
@@ -35,7 +38,6 @@ begin
     file_open(file_0, FILE_NAME_0, read_mode);
     file_open(file_1, FILE_NAME_1, read_mode);
 
-    -- while (not(endfile(file_0)) or not(endfile(file_1))) loop
     while (true) loop
         if endfile(file_0) and endfile(file_1) then
             report "[INFO] COMPARING IS PASSED";
