@@ -1,4 +1,4 @@
-# data_verification
+# VHDL_testbench_with_textIO
 tb for using files for verification
 
 If a dut recieves data, transforms it and sends forward, so one can test it by txt files with input data and reference data, what it should be after the transforming.
