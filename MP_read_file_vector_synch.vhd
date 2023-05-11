@@ -8,7 +8,6 @@ package MP_read_file_vector_synch is
 
     procedure MP_read_file_vector_synch (
         signal clk_i              : in std_logic;
-        -- file input_file           : text;
         constant FILE_NAME        : string;
         signal std_vector_input_s : out std_logic_vector;
         signal stb_o              : out std_logic
@@ -27,7 +26,7 @@ procedure MP_read_file_vector_synch (
 is
     file input_file             : text;
     variable input_line         : line;
-    variable std_vector_input_v : std_logic_vector(std_vector_input_s'range);--(8 - 1 downto 0);
+    variable std_vector_input_v : std_logic_vector(std_vector_input_s'range);
     variable good_v             : boolean;
 begin
     report "[INFO] START READING FILE IN SYNCH MODE";
