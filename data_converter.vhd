@@ -1,3 +1,7 @@
+-- simple code for testing the testbench
+-- it works like:
+-- 1. reverse the input signal from LE to BE
+-- 2. add before MSB and after LSB '1';
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
