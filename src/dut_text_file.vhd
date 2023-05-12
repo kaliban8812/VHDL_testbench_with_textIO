@@ -26,9 +26,9 @@ architecture dut_text_file_rtl of dut_text_file is
     signal data_file    : std_logic_vector(LENGTH_IN - 1 downto 0); -- data from file
     signal data_o       : std_logic_vector(LENGTH_OUT - 1 downto 0); -- data from dut;
 
-    constant FILE_NAME_DATA_IN  : string := "D:/Vova/Prog/projects/data_verification/test_data_i.txt";
-    constant FILE_NAME_DATA_OUT : string := "D:/Vova/Prog/projects/data_verification/test_data_o.txt";
-    constant FILE_NAME_DATA_REF : string := "D:/Vova/Prog/projects/data_verification/test_data_r.txt";
+    constant FILE_NAME_DATA_IN  : string := "../test_data/test_data_i.txt";
+    constant FILE_NAME_DATA_OUT : string := "../test_data/test_data_o.txt";
+    constant FILE_NAME_DATA_REF : string := "../test_data/test_data_r.txt";
 
 begin
 

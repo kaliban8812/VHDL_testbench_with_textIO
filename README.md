@@ -10,5 +10,3 @@ The dut transforms the input data to the output data and writes it to the output
 After that tb compares the output data with reference data file.
 
 There are some additional files like do_dut_text_file.do for automatization launching it in the Modelsim and wave do for printing the datas in the wave form viewer.
-This files should be changed. use your path to the files.
-In the dut_text_file.vhd change the path to the files too.
